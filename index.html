@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <form id="loginForm">
+        <p>Create a new account:</p>
+        <label>Username:</label>
+        <input type="text" placeholder="Username" id="name"><br>
+        <label>Password:</label>
+        <input type="password" placeholder="Password" id="password">
+        <input type="password" placeholder="Confirm Password" id="confirm-password"><br>
+        <button id="addBtn">Create</button>
+    </form>
     <button id="myBtn">Hack database</button>
 
-    <table id="info_table" style="width:100%">
+    <table id="info_table" style="width:50%">
     </table>
     <script src="index.js"></script>
     

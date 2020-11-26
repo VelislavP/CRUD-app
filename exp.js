@@ -1,10 +1,11 @@
+//requirements
 const sql = require('mssql');
 const express = require('express');
 const app = express();
 const port = 3000;
 const appUrl = 'http://127.0.0.1:5500';
 const cors = require('cors');
-
+//database config
 var dbConfig = {
   server:'localhost\\SQLEXPRESS',
   user: 'sa',
@@ -15,7 +16,9 @@ var dbConfig = {
     "enableArithAbort": true
     }
 };
+const conn = new sql.ConnectionPool(dbConfig);
 
+//corsOptions
 var corsOptions = {
   origin: appUrl,
   optionsSuccessStatus: 200 // For legacy browser support
@@ -24,7 +27,6 @@ app.use(cors(corsOptions));
 
 //get
 app.get('/display', (req, res) => {
-  const conn = new sql.ConnectionPool(dbConfig);
   var reqDis = new sql.Request(conn);
 
   conn.connect(function(err){
@@ -47,15 +49,19 @@ app.get('/display', (req, res) => {
    
   });
 })
+//create
+app.post('/create', (req, res) => {
+  let bodyParse = JSON.parse(req.body);
+  const Username = bodyParse.username;
+  const Password = bodyParse.password;
+  console.log(Password + " -> " + Username);
+});
 
 //delete
-app.post('/delete/', (req, res) => {
-  const conn = new sql.ConnectionPool(dbConfig);
-  var reqDel = new sql.Request(conn);
-  console.log(req.body);
-  var { id } = req.params.id;
+app.delete('/delete/:id', (req, res) => {
+  let reqDel = new sql.Request(conn);
+  let id = req.params.id;
   
-
   conn.connect(function(err){
     if (err) {
       console.log(err);
@@ -63,8 +69,7 @@ app.post('/delete/', (req, res) => {
     }
     else{
       id = parseInt(id, 10); 
-     
-      reqDel.query('DELETE FROM MyUsers WHERE Id = ?'[id],function (err, recordset) {      
+      conn.query('DELETE FROM MyUsers WHERE Id = ' + id +';',function (err, recordset) {      
         if (err) {
           console.log(err)
         }
@@ -75,6 +80,7 @@ app.post('/delete/', (req, res) => {
     }
   });
 });
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(29, 29, 29);
+    color:white;
+    font-size: 13pt;
+}
+span, input{
+    margin: 5pt;
+    margin-left: 0;
+}
+input{
+    padding: 5px 10px;
+    border-radius: 10pt;
+    font-size: 11pt;
+    outline: none;
+}
+p{
+    margin-bottom: 5pt;
+}
+button{
+    margin: 5pt;
+    margin-left: 0;
+    font-size: 11pt;
+    background-color: white;
+    border-radius: 10pt;
+    box-shadow: 11pt;
+    padding: 5px 10px;
+    outline: none;
+}
+button:hover{
+    background-color: rgb(219, 219, 219);
+}
+table, td, th {
+    border: 1px solid black;
+    border-radius: 10pt;
+}
+  
+table {
+    width: 100%;
+    border-collapse: collapse;   
+}
+input[data-state="invalid"] {
+    border-color: hsl(0, 76%, 50%);;
+  }
+  
+  /* Show green borders when valid */
+  input[data-state="valid"] {
+    border-color: hsl(120, 76%, 50%);
+  }
